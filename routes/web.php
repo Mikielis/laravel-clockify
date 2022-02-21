@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('home');
+
+Route::get('/auth/google/redirect/', [App\Http\Controllers\Auth\GoogleSocialiteController::class, 'redirect'])->name('google-auth');
+Route::get('/auth/google/incorrect/', [App\Http\Controllers\Auth\GoogleSocialiteController::class, 'incorrectAuth'])->name('google-incorrect-auth');
+Route::get('/auth/google/callback/', [App\Http\Controllers\Auth\GoogleSocialiteController::class, 'handleCallback']);

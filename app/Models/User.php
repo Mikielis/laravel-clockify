@@ -25,6 +25,10 @@ class User extends Authenticatable
         'social_type',
     ];
 
+    protected $guarded = [
+        'password'
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *

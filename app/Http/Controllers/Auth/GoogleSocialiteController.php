@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepositoryInterface;
-use Auth;
-use Throwable;
+use App\Services\UserAuthService;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirectResponse;
 
 class GoogleSocialiteController extends Controller
 {
-    public function __construct(protected UserRepositoryInterface $userRepository)
+    public function __construct(protected UserAuthService $userAuthService)
     {}
 
     /**
@@ -30,23 +28,14 @@ class GoogleSocialiteController extends Controller
      */
     public function handleCallback(): RedirectResponse
     {
-        try {
-            $user = Socialite::driver('google')->user();
-            $dbUser = $this->userRepository->getGoogleUser($user->email);
+        $user = Socialite::driver('google')->user();
+        $isAuthenticated = $this->userAuthService->authenticate($user);
 
-            if ($dbUser) {
-                Auth::login($dbUser);
-            } else {
-                $newUser = $this->userRepository->addGoogleUser($user->name, $user->email, $user->id);
-                Auth::login($newUser);
-            }
-
-            return redirect()->route('home');
-
-        } catch (Throwable $e) {
-            report($e);
+        if (!$isAuthenticated) {
             return redirect()->route('google-incorrect-auth');
         }
+
+        return redirect()->route('home');
     }
 
     public function incorrectAuth(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

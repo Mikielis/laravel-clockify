@@ -6,11 +6,11 @@ namespace Tests\Feature;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Tests\TestCase;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
+use App\Repositories\UserRepositoryInterface;
+use App\Models\User;
 
 class UserTest extends TestCase
 {
@@ -43,23 +43,18 @@ class UserTest extends TestCase
      */
     public function test_cannot_duplicate_email()
     {
-        $response = DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => 'test@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+        // Get user repository
+        $userRepository = $this->app->make(UserRepositoryInterface::class);
+
+        // Create first account
+        $user = $userRepository->addGoogleUser('test', 'test@gmail.com', Hash::make('password'));
 
         // First user successfully created
-        $this->assertTrue($response);
+        $this->assertInstanceOf(User::class, $user);
 
         try {
-            DB::table('users')->insert(
-                [
-                    'name' => Str::random(10),
-                    'email' => 'test@gmail.com',
-                    'password' => Hash::make('password'),
-                ]
-            );
+            // Try to create another account with already existing email address
+            $userRepository->addGoogleUser('test', 'test@gmail.com', Hash::make('password'));
         } catch (QueryException $e) {
             // Second user could not be created because of duplicated email address - expected SQL error 23000
             $this->assertEquals(23000, $e->getCode());
@@ -71,21 +66,20 @@ class UserTest extends TestCase
      */
     public function test_can_create_socialite_account_with_google()
     {
+        // Get list of columns from users table
         $columns = DB::getSchemaBuilder()->getColumnListing('users');
 
-        // Check required columns in DB table
+        // Check required columns by Laravel Socialite in DB table
         $this->assertContains('social_id', $columns);
         $this->assertContains('social_type', $columns);
 
-        $response = DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => 'test@gmail.com',
-            'password' => Hash::make('password'),
-            'social_id' => 999999999999999999999,
-            'social_type' => 'google',
-        ]);
+        // Get user repository
+        $userRepository = $this->app->make(UserRepositoryInterface::class);
+
+        // Create a new account
+        $user = $userRepository->addGoogleUser('test', 'test@gmail.com', '999999999999999999999');
 
         // User account successfully created
-        $this->assertTrue($response);
+        $this->assertInstanceOf(User::class, $user);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repositories\UserRepositoryInterface;
 use Auth;
-use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
 class UserAuthService

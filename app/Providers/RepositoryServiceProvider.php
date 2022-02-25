@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\BaseRepositoryInterface;
-use App\Repositories\BaseRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 

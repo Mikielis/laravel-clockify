@@ -4,7 +4,7 @@ namespace App\Services\Auth;
 
 use App\Repositories\UserRepositoryInterface;
 use App\Services\Auth\UserAuthAllowedDomains;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use function report;
 use Throwable;
 

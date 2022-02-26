@@ -103,4 +103,9 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+     * Whitelisted domains
+     */
+    'whitelisted_domains' => env('AUTH_WHITELISTED_DOMAINS')
+
 ];

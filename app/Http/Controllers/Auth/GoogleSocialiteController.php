@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Services\UserAuthService;
-use Laravel\Socialite\Facades\Socialite;
+use App\Services\Auth\UserAuthService;
 use Illuminate\Http\RedirectResponse;
+use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirectResponse;
 
 class GoogleSocialiteController extends Controller

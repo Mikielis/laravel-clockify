@@ -19,6 +19,7 @@
         </script>
     </head>
     <body>
+        @include('_partials.navigation')
         <div class="content">
             @yield('content')
         </div>

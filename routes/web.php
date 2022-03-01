@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 // These pages can be seen only by authenticated users
 Route::middleware('auth')->group(function() {
     Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('home');
+    Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index'])->name('clients');
+    Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('projects');
+    Route::get('/timesheet', [App\Http\Controllers\TimesheetController::class, 'index'])->name('timesheet');
+    Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('userActivities');
+    Route::get('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 });
 
 // Login/logout pages

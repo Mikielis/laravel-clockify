@@ -10,4 +10,11 @@ class UserActivity extends Model
     use HasFactory;
 
     protected $table = 'user_activities';
+
+    protected $fillable = [
+        'type',
+        'page',
+        'activity_description',
+        'user_id',
+    ];
 }

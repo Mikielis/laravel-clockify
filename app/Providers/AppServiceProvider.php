@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\UserActivityRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\Auth\UserAuthService;
+use App\Services\UserActivity\UserActivityService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(UserRepositoryInterface::class, UserAuthService::class);
+        $this->app->bind(UserActivityRepositoryInterface::class, UserActivityService::class);
     }
 
     /**

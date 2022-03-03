@@ -23,7 +23,7 @@
             @include('_partials.navigation')
         @endif
 
-        <div class="content">
+        <div class="content pl-3 pr-3">
             @yield('content')
         </div>
 

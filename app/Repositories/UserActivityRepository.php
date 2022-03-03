@@ -9,6 +9,10 @@ class UserActivityRepository implements UserActivityRepositoryInterface
 {
     use BaseRepository;
 
+    public function __construct(
+        protected UserActivity $model
+    ) {}
+
     /**
      * Allowed activity types
      * @var array|string[]
@@ -38,14 +42,5 @@ class UserActivityRepository implements UserActivityRepositoryInterface
             'activity_description' => $description,
             'user_id' => $userId
         ]);
-    }
-
-    /**
-     * Get last activity log
-     * @return object|null
-     */
-    public function getLast(): UserActivity|null
-    {
-        return UserActivity::latest()->first();
     }
 }

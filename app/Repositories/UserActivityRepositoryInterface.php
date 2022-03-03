@@ -15,10 +15,4 @@ interface UserActivityRepositoryInterface
      * @return void
      */
     public function add(string $page, string $type, string $description, int $userId): void;
-
-    /**
-     * Get last activity log
-     * @return object|null
-     */
-    public function getLast(): UserActivity|null;
 }

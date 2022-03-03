@@ -28,9 +28,9 @@ trait BaseRepository
 
     /**
      * Get last records
-     * @return object|null
+     * @return Model|null
      */
-    public function getLast(): UserActivity|null
+    public function getLast(): Model|null
     {
         return $this->model->orderByDesc('id')->first();
     }

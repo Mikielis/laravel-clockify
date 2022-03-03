@@ -17,7 +17,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
      * Allowed activity types
      * @var array|string[]
      */
-    protected array $types = [
+    public static array $types = [
         'seen' => 'Seen',
         'sent form' => 'Sent form',
         'deleted' => 'Deleted',
@@ -37,7 +37,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     public function add(string $page, string $type, string $description, int $userId): void
     {
         UserActivity::create([
-            'type' => $this->types[$type],
+            'type' => self::$types[$type],
             'page' => $page,
             'activity_description' => $description,
             'user_id' => $userId

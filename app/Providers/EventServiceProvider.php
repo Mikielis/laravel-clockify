@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Auth\Events\Authenticated;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use App\Listeners\UserPermissionsSetup;
+use App\Listeners\AuthenticationLog;
+use App\Listeners\LogoutLog;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,9 +17,16 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Authenticated::class => [
-            UserPermissionsSetup::class
+        // Execute listeners when user gets authenticated (logged in)
+        Login::class => [
+            UserPermissionsSetup::class,
+            AuthenticationLog::class,
         ],
+
+        // Execute listeners when user gets logged out
+        Logout::class => [
+            LogoutLog::class,
+        ]
     ];
 
     /**

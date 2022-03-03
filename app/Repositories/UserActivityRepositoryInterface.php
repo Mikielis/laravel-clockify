@@ -5,7 +5,6 @@ use App\Models\UserActivity;
 
 interface UserActivityRepositoryInterface
 {
-
     /**
      * Add new record
      * @param string $page

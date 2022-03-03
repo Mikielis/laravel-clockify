@@ -70,7 +70,7 @@ class UserActivityService
      */
     public function logLogout(): void
     {
-        $this->add('logged out', 'logged out user');
+        $this->add('logged out', 'Logged out user');
     }
 
     /**

@@ -3,17 +3,21 @@
 namespace Tests\Feature;
 
 use App\Repositories\UserActivityRepositoryInterface;
+use App\Repositories\UserActivityRepository;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 
 class UserActivityTest extends TestCase
 {
     use DatabaseMigrations;
 
     protected static $setUpHasRunOnce = false;
+
+    protected static array $activityTypes;
 
     /**
      * @return void
@@ -26,6 +30,7 @@ class UserActivityTest extends TestCase
         if (!static::$setUpHasRunOnce) {
             $this->runDatabaseMigrations();
             static::$setUpHasRunOnce = true;
+            static::$activityTypes = UserActivityRepository::$types;
         }
     }
 
@@ -72,6 +77,41 @@ class UserActivityTest extends TestCase
         $this->assertEquals('/', $lastActivity->page);
 
         // Is 'seen' type
-        $this->assertEquals('Seen', $lastActivity->type);
+        $this->assertEquals(self::$activityTypes['seen'], $lastActivity->type);
+    }
+
+    /**
+     * The application does log seen pages by authenticated user
+     * @return void
+     */
+    public function test_authentication_and_logout_logs(): void
+    {
+        // Get UserActivityRepositoryInterface
+        $userActivityRepository = $this->app->make(UserActivityRepositoryInterface::class);
+
+        // Get UserRepositoryInterface
+        $userRepository = $this->app->make(UserRepositoryInterface::class);
+
+        // Create first account
+        $user = $userRepository->addGoogleUser('test', str::random(5) . '@gmail.com', Hash::make('password'));
+
+        // Authenticate user
+        Auth::login($user);
+        $userId = Auth::id();
+
+        // Check latest log
+        $lastActivity = $userActivityRepository->getLast();
+
+        // It must be current user ID and "Authenticated" log type
+        $this->assertEquals($lastActivity->user_id, $userId);
+        $this->assertEquals(self::$activityTypes['authenticated'], $lastActivity->type);
+
+        Auth::logout();
+
+        // Check latest log
+        $lastActivity = $userActivityRepository->getLast();
+
+        $this->assertEquals(self::$activityTypes['logged out'], $lastActivity->type);
+        $this->assertEquals($userId, $lastActivity->user_id);
     }
 }

@@ -14,8 +14,9 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @param User $model
      */
-    public function __construct(protected User $model)
-    {}
+    public function __construct(
+        protected User $model
+    ) {}
 
     /**
      * @param string $email

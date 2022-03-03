@@ -39,4 +39,13 @@ class UserActivityRepository implements UserActivityRepositoryInterface
             'user_id' => $userId
         ]);
     }
+
+    /**
+     * Get last activity log
+     * @return object|null
+     */
+    public function getLast(): UserActivity|null
+    {
+        return UserActivity::latest()->first();
+    }
 }

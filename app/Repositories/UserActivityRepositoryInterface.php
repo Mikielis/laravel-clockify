@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\User;
+use App\Models\UserActivity;
 
 interface UserActivityRepositoryInterface
 {
@@ -16,4 +16,9 @@ interface UserActivityRepositoryInterface
      */
     public function add(string $page, string $type, string $description, int $userId): void;
 
+    /**
+     * Get last activity log
+     * @return object|null
+     */
+    public function getLast(): UserActivity|null;
 }

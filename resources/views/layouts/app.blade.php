@@ -19,7 +19,10 @@
         </script>
     </head>
     <body>
-        @include('_partials.navigation')
+        @if (Auth::check())
+            @include('_partials.navigation')
+        @endif
+
         <div class="content">
             @yield('content')
         </div>

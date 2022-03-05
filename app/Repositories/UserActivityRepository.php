@@ -20,6 +20,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     public static array $types = [
         'seen' => 'Seen',
         'sent form' => 'Sent form',
+        'added' => 'Added',
         'deleted' => 'Deleted',
         'edited' => 'Edited',
         'authenticated' => 'Authenticated',

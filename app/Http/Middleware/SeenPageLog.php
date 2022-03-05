@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class SeenPageLog
 {
     /**
-     * @param UserActivityService $userActivityService
-     */
-    public function __construct(
-        protected UserActivityService $userActivityService
-    ) {}
-
-    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -27,7 +20,7 @@ class SeenPageLog
     {
         // Log seen page by authenticated user
         if (Auth::check()) {
-            $this->userActivityService->logSeenPage();
+            app()->make(UserActivityService::class)->logSeenPage();
         }
 
         return $next($request);

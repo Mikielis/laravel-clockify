@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repositories\ClientRepository;
+use App\Repositories\UserActivityRepository;
 use App\Repositories\UserActivityRepositoryInterface;
+use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\Auth\UserAuthService;
 use App\Services\UserActivity\UserActivityService;
+use App\Services\Client\ClientService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +21,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserRepositoryInterface::class, UserAuthService::class);
-        $this->app->bind(UserActivityRepositoryInterface::class, UserActivityService::class);
+        // Bind repositories into interfaces
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(UserActivityRepositoryInterface::class, UserActivityRepository::class);
+        $this->app->bind(ClientActivityRepositoryInterface::class, ClientActivityRepository::class);
+
+        // Services
+        $this->app->bind(UserActivityService::class, function($app) {
+            return new UserActivityService($app->make(UserActivityRepository::class));
+        });
+
+        $this->app->bind(UserAuthService::class, function($app) {
+            return new UserAuthService($app->make(UserRepository::class));
+        });
+
+
+        $this->app->bind(ClientService::class, function($app) {
+            return new ClientService(
+                $this->app->make(UserActivityService::class),
+                $this->app->make(ClientRepository::class),
+            );
+        });
     }
 
     /**

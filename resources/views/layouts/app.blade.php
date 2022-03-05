@@ -23,6 +23,14 @@
             @include('_partials.navigation')
         @endif
 
+        @if (session('error'))
+            <div class="alert alert-danger ml-5 mr-5 text-center" role="alert">{{ session('error') }}</div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-primary ml-5 mr-5 text-center" role="alert">{{ session('success') }}</div>
+        @endif
+
         <div class="content pl-3 pr-3">
             @yield('content')
         </div>

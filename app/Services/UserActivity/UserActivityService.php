@@ -36,23 +36,33 @@ class UserActivityService
     }
 
     /**
-     * Add information of deleted record
+     * Add information about added record
+     * @param null $entityType
+     * @return void
+     */
+    public function logAddedRecord($entityType = null): void
+    {
+        $this->add('added', 'Added record: ' . $entityType);
+    }
+
+    /**
+     * Add information about deleted record
      * @param null $entityType
      * @return void
      */
     public function logDeletedRecord($entityType = null): void
     {
-        $this->add('deleted', 'Deleted record ' . $entityType);
+        $this->add('deleted', 'Deleted record: ' . $entityType);
     }
 
     /**
-     * Add information of edited record
+     * Add information about edited record
      * @param null $entityType
      * @return void
      */
     public function logEditedRecord($entityType = null): void
     {
-        $this->add('edited', 'Edited record ' . $entityType);
+        $this->add('edited', 'Edited record: ' . $entityType);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Repositories\UserActivityRepository;
 use App\Repositories\UserActivityRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryInterface;
+use App\Services\Auth\UserAuthAllowedDomains;
 use App\Services\Auth\UserAuthService;
 use App\Services\UserActivity\UserActivityService;
 use App\Services\Client\ClientService;
@@ -32,7 +33,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(UserAuthService::class, function($app) {
-            return new UserAuthService($app->make(UserRepository::class));
+            return new UserAuthService(
+                $app->make(UserRepository::class),
+                new UserAuthAllowedDomains
+            );
         });
 
 

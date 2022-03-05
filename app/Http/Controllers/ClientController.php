@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    protected $clientService;
-
-    public function __construct()
-    {
-        $this->clientService = app()->make(ClientService::class);
-    }
+    public function __construct(protected ClientService $clientService)
+    {}
 
     public function index()
     {

@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ClientService::class, function($app) {
             return new ClientService(
                 $this->app->make(UserActivityService::class),
-                $this->app->make(ClientRepository::class),
+                $this->app->make(ClientRepository::class)
             );
         });
     }

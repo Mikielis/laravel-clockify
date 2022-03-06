@@ -9,6 +9,8 @@ use App\Events\Client\Add as AddClientEvent;
 
 class ClientService
 {
+    use Country;
+
     public static array $messages = [
         'client added' => 'The client has been added',
         'client edited' => 'The client details have been saved',

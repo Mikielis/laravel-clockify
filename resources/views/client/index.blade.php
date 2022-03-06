@@ -22,6 +22,14 @@
                 <input type="text" name="name" class="form-control" id="name" placeholder="{{ _('Name') }}" maxlength="255" required>
             </div>
             <div class="form-group">
+                <label for="country">{{ _('Country') }}</label>
+                <select name="country" class="form-control" id="country" placeholder="{{ _('Country') }}">
+                    @foreach ($countries as $country)
+                        <option>{{ $country }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="name">{{ _('City') }}</label>
                 <input type="text" name="city" class="form-control" id="name" placeholder="{{ _('City') }}" maxlength="255">
             </div>

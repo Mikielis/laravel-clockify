@@ -13,7 +13,11 @@ class ClientController extends Controller
 
     public function index()
     {
-        return view('client.index');
+        $countries = $this->clientService->getCountries();
+
+        return view('client.index', [
+            'countries' => $countries
+        ]);
     }
 
     public function add(Request $request)

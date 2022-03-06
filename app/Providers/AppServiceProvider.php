@@ -4,9 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\ClientRepository;
 use App\Repositories\UserActivityRepository;
-use App\Repositories\UserActivityRepositoryInterface;
 use App\Repositories\UserRepository;
-use App\Repositories\UserRepositoryInterface;
 use App\Services\Auth\UserAuthAllowedDomains;
 use App\Services\Auth\UserAuthService;
 use App\Services\UserActivity\UserActivityService;
@@ -22,11 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Bind repositories into interfaces
-        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(UserActivityRepositoryInterface::class, UserActivityRepository::class);
-        $this->app->bind(ClientActivityRepositoryInterface::class, ClientActivityRepository::class);
-
         // Services
         $this->app->bind(UserActivityService::class, function($app) {
             return new UserActivityService($app->make(UserActivityRepository::class));

@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <button class="btn btn-secondary ml-3 mb-3" id="AddClient">{{ _('Add client') }}</button>
+    @can('client_add')
+        <button class="btn btn-secondary ml-3 mb-3" id="AddClient">{{ _('Add client') }}</button>
 
-    <div class="col-4 @if (!$errors->any()) d-none @endif" id="newClientForm">
+        <div class="col-4 @if (!$errors->any()) d-none @endif" id="newClientForm">
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -50,6 +51,7 @@
             </div>
         </form>
     </div>
+    @endcan
 
     @push('scripts')
         <script src='{{ asset('js/jq.client.js') }}' type='text/javascript'></script>

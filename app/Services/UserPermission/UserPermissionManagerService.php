@@ -1,37 +1,17 @@
 <?php
 
-namespace App\Services\Auth;
+namespace App\Services\UserPermission;
 
+use App\Repositories\UserRepositoryInterface;
 use Auth;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Models\Permission;
-use App\Repositories\UserRepositoryInterface;
+use function app;
+use function report;
 
 class UserPermissionManagerService
 {
-    /**
-     * list of base permissions
-     */
-    private array $basePermissionsList = [
-        'dashboard_view',
-        'client_view',
-        'client_add',
-        'client_edit',
-        'project_view',
-        'project_add',
-        'project_edit',
-        'timesheet_view',
-        'timesheet_add',
-        'timesheet_edit',
-        'report_view',
-    ];
-
-    /**
-     * List of admin permissions
-     */
-    private array $adminPermissionsList = [
-        'user_view'
-    ];
+    use PermissionList;
 
     /**
      * @param UserRepositoryInterface $userRepository

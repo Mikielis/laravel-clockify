@@ -2,7 +2,7 @@
 
 namespace App\Listeners\UserAccess;
 
-use App\Services\Auth\UserPermissionManagerService;
+use App\Services\UserPermission\UserPermissionManagerService;
 use Illuminate\Support\Facades\Auth;
 
 class UserPermissionsSetup

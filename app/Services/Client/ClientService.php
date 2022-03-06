@@ -4,6 +4,8 @@ namespace App\Services\Client;
 
 use App\Repositories\ClientRepositoryInterface;
 use App\Services\UserActivity\UserActivityService;
+use App\Events\Client\Add as AddClientEvent;
+
 
 class ClientService
 {
@@ -31,11 +33,8 @@ class ClientService
         // Add new client
         $client = $this->clientRepository->addClient($name, $country, $city, $postcode, $street, $houseNumber);
 
-        // Log user activity
-        $this->userActivityService->logSentForm('adding client');
         if ($client) {
-            $this->userActivityService->logAddedRecord('client');
-
+            AddClientEvent::dispatch();
             return true;
         }
 

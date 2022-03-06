@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\UserAccess;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Services\Auth\UserPermissionManagerService;
 use Illuminate\Support\Facades\Auth;
 

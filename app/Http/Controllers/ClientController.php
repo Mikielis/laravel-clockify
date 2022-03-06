@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Client\ClientService;
 use Illuminate\Http\Request;
+use App\Events\Client\SendForm;
 
 class ClientController extends Controller
 {
@@ -17,6 +18,8 @@ class ClientController extends Controller
 
     public function add(Request $request)
     {
+        SendForm::dispatch($request->input());
+
         // Validate request
         $request->validate([
             'name' => 'required|max:255',

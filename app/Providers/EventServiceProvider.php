@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Listeners\Auth\AuthenticationLog;
+use App\Listeners\Auth\LogoutLog;
+use App\Listeners\UserAccess\UserPermissionsSetup;
+use App\Events\Client\Add as AddClientEvent;
+use App\Events\Client\SendForm as SendClientFormEvent;
+use App\Listeners\Client\AddClientLog;
+use App\Listeners\Client\SendClientFormLog;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
-use App\Listeners\UserPermissionsSetup;
-use App\Listeners\AuthenticationLog;
-use App\Listeners\LogoutLog;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -26,7 +30,17 @@ class EventServiceProvider extends ServiceProvider
         // Execute listeners when user gets logged out
         Logout::class => [
             LogoutLog::class,
-        ]
+        ],
+
+        // Execute listener when user sends form for adding a new client
+        SendClientFormEvent::class => [
+            SendClientFormLog::class
+        ],
+
+        // Execute listener when user successfully adds a new client
+        AddClientEvent::class => [
+            AddClientLog::class
+        ],
     ];
 
     /**

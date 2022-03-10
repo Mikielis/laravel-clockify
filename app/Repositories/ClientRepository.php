@@ -17,13 +17,22 @@ class ClientRepository implements ClientRepositoryInterface
         protected Client $model
     ) {}
 
+    /**
+     * @param string $name
+     * @param string|null $country
+     * @param string|null $city
+     * @param string|null $postcode
+     * @param string|null $street
+     * @param string|null $houseNumber
+     * @return Client|null
+     */
     public function addClient(
         string $name,
-        string $country = null,
-        string $city = null,
-        string $postcode = null,
-        string $street = null,
-        string $houseNumber = null
+        string|null $country,
+        string|null $city,
+        string|null $postcode,
+        string|null $street,
+        string|null $houseNumber
     ): Client|null {
         return Client::create([
             'name' => $name,

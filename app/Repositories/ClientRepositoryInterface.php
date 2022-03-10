@@ -8,10 +8,10 @@ interface ClientRepositoryInterface
 {
     public function addClient(
         string $name,
-        string $country = null,
-        string $city = null,
-        string $postcode = null,
-        string $street = null,
-        string $houseNumber = null
+        string|null $country,
+        string|null $city,
+        string|null $postcode,
+        string|null $street,
+        string|null $houseNumber
     ): Client|null;
 }

@@ -36,12 +36,12 @@ class UserAuthService
         try {
             $dbUser = $this->userRepository->getGoogleUser($user->email);
 
-            if ($dbUser) {
-                Auth::login($dbUser);
-            } else {
-                $newUser = $this->userRepository->addGoogleUser($user->name, $user->email, $user->id);
-                Auth::login($newUser);
+            if (!$dbUser) {
+                $this->userRepository->addGoogleUser($user->name, $user->email, $user->id);
+                $dbUser = $this->userRepository->getGoogleUser($user->email);
             }
+
+            Auth::login($dbUser);
 
             return true;
 

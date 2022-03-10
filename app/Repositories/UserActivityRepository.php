@@ -33,7 +33,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
      * @param string $type
      * @param string $description
      * @param int $userId
-     * @return bool
+     * @return void
      */
     public function add(string $page, string $type, string $description, int $userId): void
     {

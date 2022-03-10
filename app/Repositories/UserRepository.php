@@ -36,11 +36,11 @@ class UserRepository implements UserRepositoryInterface
      * @param string $name
      * @param string $email
      * @param string $socialId
-     * @return Model|null
+     * @return void
      */
-    public function addGoogleUser(string $name, string $email, string $socialId): User|NULL
+    public function addGoogleUser(string $name, string $email, string $socialId): void
     {
-        return User::create([
+        User::create([
             'name' => $name,
             'email' => $email,
             'social_id'=> $socialId,

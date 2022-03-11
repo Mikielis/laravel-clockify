@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Client\SendForm;
 use App\Services\Client\ClientService;
 use Illuminate\Http\Request;
-use App\Events\Client\SendForm;
+use Illuminate\Http\RedirectResponse;
 
 class ClientController extends Controller
 {
@@ -65,8 +66,16 @@ class ClientController extends Controller
 
     }
 
-    public function disable(Request $request)
+    /**
+     * Disable client
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function disable(Request $request): RedirectResponse
     {
+        $this->clientService->disable($request->id);
 
+        // Redirect with success message
+        return redirect()->back()->with('success', $this->clientService::$messages['client disabled']);
     }
 }

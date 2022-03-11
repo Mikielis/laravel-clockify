@@ -59,4 +59,9 @@ class ClientRepository implements ClientRepositoryInterface
         // Return list sorted by id
         return Client::all();
     }
+
+    public function disable(string $id): void
+    {
+        Client::find($id)->delete();
+    }
 }

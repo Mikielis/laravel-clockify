@@ -5,7 +5,10 @@ namespace App\Services\Client;
 use App\Repositories\ClientRepositoryInterface;
 use App\Services\UserActivity\UserActivityService;
 use App\Events\Client\Add as AddClientEvent;
+use App\Events\Client\Disable as DisableClientEvent;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class ClientService
@@ -52,6 +55,27 @@ class ClientService
         }
 
         return false;
+    }
+
+    /**
+     * Disable client
+     * @param string $id
+     * @return void
+     */
+    public function disable(string $id): void
+    {
+        // Find client
+        $client = $this->clientRepository->find($id);
+
+        // Client not found
+        if (!$client) {
+            Log::info(Auth::user()->name . ' has tried to disable non-existing client with ID: ' . $id);
+            abort(404);
+        }
+
+        // Disable client and trigger event
+        $this->clientRepository->disable($client->id);
+        DisableClientEvent::dispatch();
     }
 
     /**

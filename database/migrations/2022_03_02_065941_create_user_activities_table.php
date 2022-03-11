@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_activities', function (Blueprint $table) {
-            $table->uuid('id')->index();
+            $table->uuid('id')->primary();
             $table->string('type', 30)->index('type');
             $table->string('page', 255);
             $table->string('activity_description', 400);

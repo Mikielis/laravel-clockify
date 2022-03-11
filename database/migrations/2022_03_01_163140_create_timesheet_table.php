@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('timesheet', function (Blueprint $table) {
-            $table->uuid('id')->index();
+            $table->uuid('id')->primary();
             $table->dateTime('date_from')->nullable();
             $table->dateTime('date_to')->nullable();
             $table->integer('dev_time')->nullable()->comment('seconds');

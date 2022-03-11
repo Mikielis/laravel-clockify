@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->index();
             $table->string('name');
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreignId('client_id')
+            $table->foreignUuid('client_id')
                 ->constrained()
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

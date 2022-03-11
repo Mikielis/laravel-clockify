@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('timesheet', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->index();
             $table->dateTime('date_from')->nullable();
             $table->dateTime('date_to')->nullable();
             $table->integer('dev_time')->nullable()->comment('seconds');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreignId('project_id')
+            $table->foreignUuid('project_id')
                 ->constrained()
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

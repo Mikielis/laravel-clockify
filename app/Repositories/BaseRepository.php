@@ -18,10 +18,10 @@ trait BaseRepository
 
     /**
      * Find record by ID
-     * @param int $id
+     * @param string $id
      * @return Model|null
      */
-    public function find(int $id): ?Model
+    public function find(string $id): ?Model
     {
         return $this->model->find($id);
     }

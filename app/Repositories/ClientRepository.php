@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -24,7 +24,7 @@ class ClientRepository implements ClientRepositoryInterface
      * @param string|null $postcode
      * @param string|null $street
      * @param string|null $houseNumber
-     * @return Client|null
+     * @return void
      */
     public function addClient(
         string $name,
@@ -33,8 +33,8 @@ class ClientRepository implements ClientRepositoryInterface
         string|null $postcode,
         string|null $street,
         string|null $houseNumber
-    ): Client|null {
-        return Client::create([
+    ): void {
+        Client::create([
             'name' => $name,
             'country' => $country,
             'city' => $city,
@@ -42,5 +42,21 @@ class ClientRepository implements ClientRepositoryInterface
             'street' => $street,
             'house_number' => $houseNumber
         ]);
+    }
+
+    /**
+     * Get clients
+     * @param bool|null $sortByName
+     * @return Collection|null
+     */
+    public function getClients(null|bool $sortByName): ?Collection
+    {
+        // Return list sorted by client name
+        if (true == $sortByName) {
+            return Client::all()->sortBy('name');
+        }
+
+        // Return list sorted by id
+        return Client::all();
     }
 }

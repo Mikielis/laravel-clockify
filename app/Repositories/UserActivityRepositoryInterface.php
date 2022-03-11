@@ -10,8 +10,8 @@ interface UserActivityRepositoryInterface
      * @param string $page
      * @param string $type
      * @param string $description
-     * @param int $userId
+     * @param string $userId
      * @return void
      */
-    public function add(string $page, string $type, string $description, int $userId): void;
+    public function add(string $page, string $type, string $description, string $userId): void;
 }

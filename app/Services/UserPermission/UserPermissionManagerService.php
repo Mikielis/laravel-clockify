@@ -26,10 +26,10 @@ class UserPermissionManagerService
 
     /**
      * Set user permissions
-     * @param int $userId
+     * @param string $userId
      * @return void
      */
-    public function setUserPermissions(int $userId): void
+    public function setUserPermissions(string $userId): void
     {
         // Add permissions of they do not exist
         $this->addPermissions($this->basePermissionsList);
@@ -40,7 +40,6 @@ class UserPermissionManagerService
         if (!$user->hasPermissionTo($this->basePermissionsList[0])) {
             $user->givePermissionTo($this->basePermissionsList);
         }
-
     }
 
     /**

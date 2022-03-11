@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_activities', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->index();
             $table->string('type', 30)->index('type');
             $table->string('page', 255);
             $table->string('activity_description', 400);
 
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->constrained()
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

@@ -12,12 +12,15 @@ trait PermissionList
         'client_view',
         'client_add',
         'client_edit',
+        'client_disable',
         'project_view',
         'project_add',
         'project_edit',
+        'project_disable',
         'timesheet_view',
         'timesheet_add',
         'timesheet_edit',
+        'timesheet_disable',
         'report_view',
     ];
 

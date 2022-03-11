@@ -6,12 +6,33 @@ class UserAccessCheck
 {
     use PermissionList;
 
+    /**
+     * Pair route names with required permission type
+     * @var array|string[]
+     */
     protected array $perms = [
         'home' => 'dashboard_view',
+
+        // Client
         'clients' => 'client_view',
         'add-client' => 'client_add',
+        'edit-client' => 'client_edit',
+        'save-client' => 'client_save',
+        'disable-client' => 'client_disable',
+
+        // Project
         'projects' => 'project_view',
+        'add-project' => 'project_add',
+        'edit-project' => 'project_edit',
+        'save-project' => 'project_save',
+        'disable-project' => 'project_disable',
+
+        // Timesheet
         'timesheet' => 'timesheet_view',
+        'add-timesheet' => 'timesheet_add',
+        'edit-timesheet' => 'timesheet_edit',
+        'save-timesheet' => 'timesheet_save',
+        'disable-timesheet' => 'timesheet_disable',
     ];
 
     /**

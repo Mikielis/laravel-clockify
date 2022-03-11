@@ -5,6 +5,7 @@ namespace App\Services\Client;
 use App\Repositories\ClientRepositoryInterface;
 use App\Services\UserActivity\UserActivityService;
 use App\Events\Client\Add as AddClientEvent;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class ClientService
@@ -13,8 +14,8 @@ class ClientService
 
     public static array $messages = [
         'client added' => 'The client has been added',
-        'client edited' => 'The client details have been saved',
-        'client deleted' => 'The client has been deleted',
+        'client save' => 'The client details have been saved',
+        'client disabled' => 'The client has been disabled',
         'error' => 'Something went wrong',
     ];
 
@@ -23,6 +24,16 @@ class ClientService
         protected ClientRepositoryInterface $clientRepository
     ) {}
 
+    /**
+     * Add client
+     * @param string $name
+     * @param string|null $country
+     * @param string|null $city
+     * @param string|null $postcode
+     * @param string|null $street
+     * @param string|null $houseNumber
+     * @return bool
+     */
     public function addClient(
         string $name,
         string $country = null,
@@ -41,5 +52,14 @@ class ClientService
         }
 
         return false;
+    }
+
+    /**
+     * Get clients
+     * @return Collection|null
+     */
+    public function getClients(): ?Collection
+    {
+        return $this->clientRepository->getClients(true);
     }
 }

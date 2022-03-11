@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('timesheet', function (Blueprint $table) {
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->constrained()
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

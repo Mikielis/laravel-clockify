@@ -19,6 +19,7 @@ class UserRepository implements UserRepositoryInterface
     ) {}
 
     /**
+     * Get active user account
      * @param string $email
      * @return Model|null
      */
@@ -26,7 +27,8 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::where([
             ['email', '=', $email],
-            ['social_type', '=', 'google']
+            ['social_type', '=', 'google'],
+            ['deleted_at', '=', null]
         ])->first();
     }
 

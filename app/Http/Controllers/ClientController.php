@@ -14,9 +14,12 @@ class ClientController extends Controller
     public function index()
     {
         $countries = $this->clientService->getCountries();
+        $clients = $this->clientService->getClients();
 
         return view('client.index', [
-            'countries' => $countries
+            'clients' => $clients,
+            'clientsNumber' => count($clients),
+            'countries' => $countries,
         ]);
     }
 
@@ -50,5 +53,20 @@ class ClientController extends Controller
 
         // Redirect with error message
         return redirect()->back()->with('error', $this->clientService::$messages['error']);
+    }
+
+    public function edit(Request $request)
+    {
+
+    }
+
+    public function save(Request $request)
+    {
+
+    }
+
+    public function disable(Request $request)
+    {
+
     }
 }

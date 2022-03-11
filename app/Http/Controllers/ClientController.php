@@ -38,7 +38,7 @@ class ClientController extends Controller
         ]);
 
         // Add client
-        $result = $this->clientService->addClient(
+        $this->clientService->addClient(
             $request->input('name'),
             $request->input('country'),
             $request->input('city'),
@@ -47,13 +47,8 @@ class ClientController extends Controller
             $request->input('houseNumber'),
         );
 
-        if ($result == true) {
-            // Redirect with success message
-            return redirect()->back()->with('success', $this->clientService::$messages['client added']);
-        }
-
-        // Redirect with error message
-        return redirect()->back()->with('error', $this->clientService::$messages['error']);
+        // Redirect with success message
+        return redirect()->back()->with('success', $this->clientService::$messages['client added']);
     }
 
     public function edit(Request $request)

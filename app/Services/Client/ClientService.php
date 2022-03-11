@@ -44,17 +44,13 @@ class ClientService
         string $postcode = null,
         string $street = null,
         string $houseNumber = null
-    ): bool
+    ): void
     {
         // Add new client
-        $client = $this->clientRepository->addClient($name, $country, $city, $postcode, $street, $houseNumber);
+        $this->clientRepository->addClient($name, $country, $city, $postcode, $street, $houseNumber);
 
-        if ($client) {
-            AddClientEvent::dispatch();
-            return true;
-        }
-
-        return false;
+        // Trigger event
+        AddClientEvent::dispatch();
     }
 
     /**

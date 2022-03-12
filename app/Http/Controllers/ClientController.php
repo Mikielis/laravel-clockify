@@ -26,6 +26,9 @@ class ClientController extends Controller
             'clients' => $clients,
             'clientsNumber' => count($clients),
             'countries' => $countries,
+            'breadcrumb' => [
+                ['name' => _('Clients')]
+            ]
         ]);
     }
 

@@ -27,6 +27,8 @@
 
         @include('_partials.alerts')
 
+        @include('_partials.breadcrumb')
+
         <div class="content pl-3 pr-3">
             @yield('content')
         </div>

@@ -11,6 +11,17 @@
   -webkit-border-radius: 0;
   border: 0;
 }
+.breadcrumb-nav {
+  margin-top: -48px;
+  margin-bottom: 30px;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+.breadcrumb-nav .breadcrumb {
+  background: transparent;
+  border-bottom: 2px #F8F9FA solid;
+}
 .form {
   background: #F8F9FA;
   padding: 15px;

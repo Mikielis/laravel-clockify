@@ -2,7 +2,7 @@
 
 @section('content')
     @can('client_add')
-        <button class="btn btn-secondary ml-3 mb-3" id="addClient"><i class="fa-solid fa-plus"></i> {{ _('Add client') }}</button>
+        <button class="btn btn-secondary btn-sm ml-3 mb-3" id="addClient"><i class="fa-solid fa-plus"></i> {{ _('Add client') }}</button>
 
         <div class="form @if (!$errors->any()) d-none @endif" id="clientForm">
             <div class="col-4">
@@ -16,9 +16,7 @@
             </div>
         </div>
 
-        <div class="col-12 mt-5">
-            <h1 class="mb-3">{{ __('Clients') }} <span class="badge badge-secondary">{{ $clientsNumber }}</span></h1>
-
+        <div class="col-12 mt-3">
             @include('client.list.full')
         </div>
 

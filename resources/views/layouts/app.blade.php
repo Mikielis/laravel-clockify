@@ -11,7 +11,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/layout.min.css') }}" media="all">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.min.css') }}" media="all">
+        <script src="https://kit.fontawesome.com/fbba33911d.js" crossorigin="anonymous"></script>
 
         <script>
             window.vars = window.vars || {};
@@ -20,16 +21,11 @@
     </head>
     <body>
         @if (Auth::check())
+            @include('_partials.modal.delete')
             @include('_partials.navigation')
         @endif
 
-        @if (session('error'))
-            <div class="alert alert-danger ml-5 mr-5 text-center" role="alert">{{ session('error') }}</div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-primary ml-5 mr-5 text-center" role="alert">{{ session('success') }}</div>
-        @endif
+        @include('_partials.alerts')
 
         <div class="content pl-3 pr-3">
             @yield('content')

@@ -39,7 +39,9 @@
                             <button
                                 type="button"
                                 class="btn btn-danger"
-                                onclick="document.location.href='{{ route('disable-client', ['id' => $client->id]) }}'">
+                                data-toggle="modal"
+                                data-target="#deleteConfirmModal"
+                                onclick="Client.methods.disable('{{ route('disable-client', ['id' => $client->id]) }}')">
                                 {{ _('Disable') }}
                             </button>
                         @endcan

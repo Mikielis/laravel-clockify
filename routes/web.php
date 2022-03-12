@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index'])->name('clients');
     Route::post('/clients/add', [App\Http\Controllers\ClientController::class, 'add'])->name('add-client');
     Route::get('/clients/edit/{id}', [App\Http\Controllers\ClientController::class, 'edit'])->name('edit-client');
-    Route::post('/clients/edit/{id}', [App\Http\Controllers\ClientController::class, 'save'])->name('save-client');
+    Route::post('/clients/save/{id}', [App\Http\Controllers\ClientController::class, 'save'])->name('save-client');
     Route::get('/clients/disable/{id}', [App\Http\Controllers\ClientController::class, 'disable'])->name('disable-client');
 
     // Project

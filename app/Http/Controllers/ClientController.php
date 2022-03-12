@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Events\Client\SendForm;
 use App\Services\Client\ClientService;
+use App\Services\Client\FormValidation;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class ClientController extends Controller
 {
+    use FormValidation;
+
     public function __construct(protected ClientService $clientService)
     {}
 
@@ -24,18 +27,17 @@ class ClientController extends Controller
         ]);
     }
 
+    /**
+     * Add client
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function add(Request $request)
     {
         SendForm::dispatch($request->input());
 
         // Validate request
-        $request->validate([
-            'name' => 'required|max:255',
-            'city' => 'max:255',
-            'postcode' => 'max:10',
-            'street' => 'max:255',
-            'house_number' => 'max:10',
-        ]);
+        $request->validate($this->getFormValidationRules());
 
         // Add client
         $this->clientService->addClient(
@@ -51,14 +53,39 @@ class ClientController extends Controller
         return redirect()->back()->with('success', $this->clientService::$messages['client added']);
     }
 
+    /**
+     * Edit client
+     * @param Request $request
+     * @return void
+     */
     public function edit(Request $request)
     {
+        $countries = $this->clientService->getCountries();
+        $client = $this->clientService->getClient($request->id);
 
+        return view('client.edit', [
+            'client' => $client,
+            'countries' => $countries
+        ]);
     }
 
     public function save(Request $request)
     {
+        // Validate request
+        $request->validate($this->getFormValidationRules());
 
+        $this->clientService->saveClient(
+            $request->id,
+            $request->input('name'),
+            $request->input('country'),
+            $request->input('city'),
+            $request->input('postcode'),
+            $request->input('street'),
+            $request->input('houseNumber')
+        );
+
+        // Redirect with success message
+        return redirect()->back()->with('success', $this->clientService::$messages['client saved']);
     }
 
     /**

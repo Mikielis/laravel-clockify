@@ -17,21 +17,21 @@ class UserAccessCheck
         'clients' => 'client_view',
         'add-client' => 'client_add',
         'edit-client' => 'client_edit',
-        'save-client' => 'client_save',
+        'save-client' => 'client_edit',
         'disable-client' => 'client_disable',
 
         // Project
         'projects' => 'project_view',
         'add-project' => 'project_add',
         'edit-project' => 'project_edit',
-        'save-project' => 'project_save',
+        'save-project' => 'project_edit',
         'disable-project' => 'project_disable',
 
         // Timesheet
         'timesheet' => 'timesheet_view',
         'add-timesheet' => 'timesheet_add',
         'edit-timesheet' => 'timesheet_edit',
-        'save-timesheet' => 'timesheet_save',
+        'save-timesheet' => 'timesheet_edit',
         'disable-timesheet' => 'timesheet_disable',
     ];
 

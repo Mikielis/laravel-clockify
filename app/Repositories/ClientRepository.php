@@ -18,6 +18,7 @@ class ClientRepository implements ClientRepositoryInterface
     ) {}
 
     /**
+     * Add client
      * @param string $name
      * @param string|null $country
      * @param string|null $city
@@ -35,6 +36,36 @@ class ClientRepository implements ClientRepositoryInterface
         string|null $houseNumber
     ): void {
         Client::create([
+            'name' => $name,
+            'country' => $country,
+            'city' => $city,
+            'postcode' => $postcode,
+            'street' => $street,
+            'house_number' => $houseNumber
+        ]);
+    }
+
+    /**
+     * Save client
+     * @param string $id
+     * @param string $name
+     * @param string|null $country
+     * @param string|null $city
+     * @param string|null $postcode
+     * @param string|null $street
+     * @param string|null $houseNumber
+     * @return void
+     */
+    public function saveClient(
+        string $id,
+        string $name,
+        string|null $country,
+        string|null $city,
+        string|null $postcode,
+        string|null $street,
+        string|null $houseNumber
+    ): void {
+        Client::find($id)->save([
             'name' => $name,
             'country' => $country,
             'city' => $city,

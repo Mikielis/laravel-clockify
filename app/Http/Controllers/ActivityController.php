@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('nav', 'user');
+    }
+
     public function index()
     {
 

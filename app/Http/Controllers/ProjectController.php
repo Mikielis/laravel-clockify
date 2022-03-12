@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('nav', 'project');
+    }
+
     public function index()
     {
 

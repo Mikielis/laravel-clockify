@@ -13,7 +13,9 @@ class ClientController extends Controller
     use FormValidation;
 
     public function __construct(protected ClientService $clientService)
-    {}
+    {
+        view()->share('nav', 'client');
+    }
 
     public function index()
     {

@@ -1,30 +1,31 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <div class="container-fluid">
         <ul class="navbar-nav">
             @can('dashboard_view')
-                <li class="nav-item active">
+                <li class="nav-item @if (isset($nav) && $nav == 'home') active @endif">
                     <a class="nav-link" href="{{ route('home') }}">{{ _('Dashboard') }}</a>
                 </li>
             @endcan
             @can('client_view')
-                <li class="nav-item">
+                <li class="nav-item @if (isset($nav) && $nav == 'client') active @endif">
                     <a class="nav-link" href="{{ route('clients') }}">{{ _('Clients') }}</a>
                 </li>
             @endcan
             @can('project_view')
-                <li class="nav-item">
+                <li class="nav-item @if (isset($nav) && $nav == 'project') active @endif">
                     <a class="nav-link" href="{{ route('projects') }}">{{ _('Projects') }}</a>
                 </li>
             @endcan
             @can('timesheet_view')
-                <li class="nav-item">
+                <li class="nav-item @if (isset($nav) && $nav == 'timesheet') active @endif">
                     <a class="nav-link" href="{{ route('timesheet') }}">{{ _('Timesheet') }}</a>
                 </li>
             @endcan
         </ul>
 
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (isset($nav) && $nav == 'user') active @endif">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </a>

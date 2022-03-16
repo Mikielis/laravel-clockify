@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function() {
 
     // Project
     Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('projects');
+    Route::post('/projects/add', [App\Http\Controllers\ProjectController::class, 'add'])->name('add-project');
+    Route::get('/projects/edit/{id}', [App\Http\Controllers\ProjectController::class, 'edit'])->name('edit-project');
+    Route::post('/projects/save/{id}', [App\Http\Controllers\ProjectController::class, 'save'])->name('save-project');
+    Route::get('/projects/disable/{id}', [App\Http\Controllers\ProjectController::class, 'disable'])->name('disable-project');
+
 
     // Timesheet
     Route::get('/timesheet', [App\Http\Controllers\TimesheetController::class, 'index'])->name('timesheet');

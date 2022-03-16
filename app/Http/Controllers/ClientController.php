@@ -70,10 +70,19 @@ class ClientController extends Controller
 
         return view('client.edit', [
             'client' => $client,
-            'countries' => $countries
+            'countries' => $countries,
+            'breadcrumb' => [
+                ['name' => _('Clients'), 'url' => route('clients')],
+                ['name' => _('Edit: ' . $client->name)]
+            ]
         ]);
     }
 
+    /**
+     * Save client
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function save(Request $request)
     {
         // Validate request
@@ -86,7 +95,7 @@ class ClientController extends Controller
             $request->input('city'),
             $request->input('postcode'),
             $request->input('street'),
-            $request->input('houseNumber')
+            $request->input('house_number')
         );
 
         // Redirect with success message

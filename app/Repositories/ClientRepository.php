@@ -65,14 +65,16 @@ class ClientRepository implements ClientRepositoryInterface
         string|null $street,
         string|null $houseNumber
     ): void {
-        Client::find($id)->save([
-            'name' => $name,
-            'country' => $country,
-            'city' => $city,
-            'postcode' => $postcode,
-            'street' => $street,
-            'house_number' => $houseNumber
-        ]);
+        $client = Client::find($id);
+
+        $client->name = $name;
+        $client->country = $country;
+        $client->city = $city;
+        $client->postcode = $postcode;
+        $client->street = $street;
+        $client->house_number = $houseNumber;
+
+        $client->save();
     }
 
     /**

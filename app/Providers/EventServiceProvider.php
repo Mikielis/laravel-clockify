@@ -7,8 +7,12 @@ use App\Listeners\Auth\LogoutLog;
 use App\Listeners\UserAccess\UserPermissionsSetup;
 use App\Events\Client\Add as AddClientEvent;
 use App\Events\Client\SendForm as SendClientFormEvent;
+use App\Events\Project\Add as AddProjectEvent;
+use App\Events\Project\SendForm as SendProjectFormEvent;
 use App\Listeners\Client\AddClientLog;
 use App\Listeners\Client\SendClientFormLog;
+use App\Listeners\Project\AddProjectLog;
+use App\Listeners\Project\SendProjectFormLog;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -40,6 +44,16 @@ class EventServiceProvider extends ServiceProvider
         // Execute listener when user successfully adds a new client
         AddClientEvent::class => [
             AddClientLog::class
+        ],
+
+        // Execute listener when user sends form for adding a new project
+        SendProjectFormEvent::class => [
+            SendProjectFormLog::class
+        ],
+
+        // Execute listener when user successfully adds a new project
+        AddProjectEvent::class => [
+            AddProjectLog::class
         ],
     ];
 

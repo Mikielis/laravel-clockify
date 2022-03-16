@@ -16,4 +16,15 @@ class Project extends Model
     protected $keyType = 'string';
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'name',
+        'date_from',
+        'date_to',
+        'deadline',
+        'dev_time_limit',
+        'client_id',
+        'trello_board',
+        'note',
+    ];
 }

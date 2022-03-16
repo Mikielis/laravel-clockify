@@ -1,7 +1,6 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>{{ _('ID') }}</th>
         <th>{{ _('Name') }}</th>
         <th>{{ _('Country') }}</th>
         <th>{{ _('Street') }}</th>
@@ -16,7 +15,6 @@
     @if ($clientsNumber > 0)
         @foreach ($clients as $client)
             <tr>
-                <td>{{ $client->id }}</td>
                 <td>{{ $client->name }}</td>
                 <td>{{ $client->country ?? '-' }}</td>
                 <td>{{ $client->street ?? '-' }}</td>
@@ -31,7 +29,7 @@
                                 type="button"
                                 class="btn btn-secondary"
                                 onclick="document.location.href='{{ route('edit-client', ['id' => $client->id]) }}'">
-                                {{ _('Edit') }}
+                                <i class="fa-solid fa-pen-to-square"></i> {{ _('Edit') }}
                             </button>
                         @endcan
 
@@ -42,7 +40,7 @@
                                 data-toggle="modal"
                                 data-target="#deleteConfirmModal"
                                 onclick="Client.methods.disable('{{ route('disable-client', ['id' => $client->id]) }}')">
-                                {{ _('Disable') }}
+                                <i class="fa-solid fa-trash"></i> {{ _('Disable') }}
                             </button>
                         @endcan
                     </div>

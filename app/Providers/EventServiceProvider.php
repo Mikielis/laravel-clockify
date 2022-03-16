@@ -13,6 +13,8 @@ use App\Listeners\Client\AddClientLog;
 use App\Listeners\Client\SendClientFormLog;
 use App\Listeners\Project\AddProjectLog;
 use App\Listeners\Project\SendProjectFormLog;
+use App\Listeners\Project\AddTimesheetLog;
+use App\Listeners\Project\SendTimesheetFormLog;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -54,6 +56,16 @@ class EventServiceProvider extends ServiceProvider
         // Execute listener when user successfully adds a new project
         AddProjectEvent::class => [
             AddProjectLog::class
+        ],
+
+        // Execute listener when user sends form for reporting dev hours
+        SendTimesheetFormEvent::class => [
+            SendTimesheetFormLog::class
+        ],
+
+        // Execute listener when user successfully reports dev hours
+        AddTimesheetEvent::class => [
+            AddTimesheetLog::class
         ],
     ];
 

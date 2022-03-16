@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function() {
 
     // Timesheet
     Route::get('/timesheet', [App\Http\Controllers\TimesheetController::class, 'index'])->name('timesheet');
+    Route::post('/timesheet/add', [App\Http\Controllers\ProjectController::class, 'add'])->name('add-timesheet');
+    Route::get('/timesheet/edit/{id}', [App\Http\Controllers\ProjectController::class, 'edit'])->name('edit-timesheet');
+    Route::post('/timesheet/save/{id}', [App\Http\Controllers\ProjectController::class, 'save'])->name('save-timesheet');
+    Route::get('/timesheet/disable/{id}', [App\Http\Controllers\ProjectController::class, 'disable'])->name('disable-timesheet');
 
     // User activities
     Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('userActivities');

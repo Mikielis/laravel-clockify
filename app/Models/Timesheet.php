@@ -16,4 +16,12 @@ class Timesheet extends Model
     protected $keyType = 'string';
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'date_from',
+        'date_to',
+        'dev_time',
+        'project_id',
+        'user_id',
+    ];
 }

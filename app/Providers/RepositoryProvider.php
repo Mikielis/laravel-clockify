@@ -10,6 +10,8 @@ use App\Repositories\ClientRepository;
 use App\Repositories\ClientRepositoryInterface;
 use App\Repositories\ProjectRepository;
 use App\Repositories\ProjectRepositoryInterface;
+use App\Repositories\TimesheetRepository;
+use App\Repositories\TimesheetRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(UserActivityRepositoryInterface::class, UserActivityRepository::class);
         $this->app->bind(ClientRepositoryInterface::class, ClientRepository::class);
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
+        $this->app->bind(TimesheetRepositoryInterface::class, TimesheetRepository::class);
     }
 
     /**

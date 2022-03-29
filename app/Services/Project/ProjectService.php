@@ -165,10 +165,29 @@ class ProjectService
 
     /**
      * Get projects
+     * @param bool|null $orderByClientName
      * @return SupportCollection|null
      */
-    public function getProjects(): ?SupportCollection
+    public function getProjects(?bool $orderByClientName = null): ?SupportCollection
     {
-        return $this->projectRepository->getProjects(true);
+        return $this->projectRepository->getProjects(true, $orderByClientName);
+    }
+
+    /**
+     * Get projects grouped by client
+     * @return array
+     */
+    public function getProjectsGroupedByClient(): array
+    {
+        $projects = $this->getProjects(true);
+        $groupedProjects = [];
+
+        if (count($projects) > 0) {
+            foreach ($projects as $key => $project) {
+                $groupedProjects[$project->client_id][] = $projects[$key];
+            }
+        }
+
+        return $groupedProjects;
     }
 }

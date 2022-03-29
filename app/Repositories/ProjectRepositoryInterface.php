@@ -22,13 +22,13 @@ interface ProjectRepositoryInterface
      */
     public function addProject(
         string $name,
-        string|null $dateFrom,
-        string|null $dateTo,
-        string|null $deadline,
-        int|null $devTimeLimit,
+        ?string $dateFrom,
+        ?string $dateTo,
+        ?string $deadline,
+        ?int $devTimeLimit,
         string $clientId,
-        string|null $trelloBoard,
-        string|null $note,
+        ?string $trelloBoard,
+        ?string $note,
     ): void;
 
     /**
@@ -47,21 +47,22 @@ interface ProjectRepositoryInterface
     public function saveProject(
         string $id,
         string $name,
-        string|null $dateFrom,
-        string|null $dateTo,
-        string|null $deadline,
-        int|null $devTimeLimit,
+        ?string $dateFrom,
+        ?string $dateTo,
+        ?string $deadline,
+        ?int $devTimeLimit,
         string $clientId,
-        string|null $trelloBoard,
-        string|null $note,
+        ?string $trelloBoard,
+        ?string $note,
     ): void;
 
     /**
      * Get projects
      * @param bool|null $sortByName
+     * @param bool|null $sortByClientName
      * @return SupportCollection|null
      */
-    public function getProjects(null|bool $sortByName): ?SupportCollection;
+    public function getProjects(?bool $sortByName = null, ?bool $sortByClientName = null): ?SupportCollection;
 
     /**
      * Disable project

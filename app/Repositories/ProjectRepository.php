@@ -21,24 +21,24 @@ class ProjectRepository implements ProjectRepositoryInterface
     /**
      * Add project
      * @param string $name
-     * @param string|null $dateFrom
-     * @param string|null $dateTo
-     * @param string|null $deadline
+     * @param ?string $dateFrom
+     * @param ?string $dateTo
+     * @param ?string $deadline
      * @param int|null $devTimeLimit
      * @param string $clientId
-     * @param string|null $trelloBoard
-     * @param string|null $note
+     * @param ?string $trelloBoard
+     * @param ?string $note
      * @return void
      */
     public function addProject(
         string $name,
-        string|null $dateFrom,
-        string|null $dateTo,
-        string|null $deadline,
-        int|null $devTimeLimit,
+        ?string $dateFrom,
+        ?string $dateTo,
+        ?string $deadline,
+        ?int $devTimeLimit,
         string $clientId,
-        string|null $trelloBoard,
-        string|null $note,
+        ?string $trelloBoard,
+        ?string $note,
     ): void {
         Project::create([
             'name' => $name,
@@ -68,13 +68,13 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function saveProject(
         string $id,
         string $name,
-        string|null $dateFrom,
-        string|null $dateTo,
-        string|null $deadline,
-        int|null $devTimeLimit,
+        ?string $dateFrom,
+        ?string $dateTo,
+        ?string $deadline,
+        ?int $devTimeLimit,
         string $clientId,
-        string|null $trelloBoard,
-        string|null $note,
+        ?string $trelloBoard,
+        ?string $note,
     ): void {
         $project = Project::find($id);
 
@@ -93,19 +93,30 @@ class ProjectRepository implements ProjectRepositoryInterface
     /**
      * Get projects
      * @param bool|null $sortByName
+     * @param bool|null $sortByClientName
      * @return SupportCollection|null
      */
-    public function getProjects(null|bool $sortByName): ?SupportCollection
+    public function getProjects(?bool $sortByName = null, ?bool $sortByClientName = null): ?SupportCollection
     {
         $query = DB::table('projects')
             ->leftJoin('clients', 'clients.id', '=', 'projects.client_id')
-            ->select('projects.*', 'clients.name as client_name')
+            ->select(
+                'projects.*',
+                'clients.name as client_name',
+                'clients.id as client_id',
+                'clients.country as client_country',
+            )
             ->whereNull('clients.deleted_at')
             ->whereNull('projects.deleted_at');
 
-        // Return list sorted by project name
+        // Sort by client name
+        if (true == $sortByClientName) {
+            $query->orderBy('client_name');
+        }
+
+        // Sort by project name
         if (true == $sortByName) {
-            $query->orderBy('clients.name');
+            $query->orderBy('projects.name');
         }
 
         return $query->get();

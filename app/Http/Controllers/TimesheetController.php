@@ -19,7 +19,7 @@ class TimesheetController extends Controller
     public function index()
     {
         $devHours = $this->timesheetService->getUserRecords(Auth::user()->id);
-        $projects = $this->projectService->getProjects();
+        $projects = $this->projectService->getProjectsGroupedByClient();
 
         return view('timesheet.index', [
             'devHours' => $devHours,

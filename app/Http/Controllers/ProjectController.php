@@ -24,11 +24,13 @@ class ProjectController extends Controller
     {
         $clients = $this->clientService->getClients();
         $projects = $this->projectService->getProjects();
+        $users = $this->projectService->getUsers();
 
         return view('project.index', [
             'clients' => $clients,
             'projects' => $projects,
             'projectsNumber' => count($projects),
+            'users' => $users,
             'breadcrumb' => [
                 ['name' => _('Projects')]
             ]

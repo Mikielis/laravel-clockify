@@ -6,7 +6,7 @@
         <th>{{ _('From') }}</th>
         <th>{{ _('To') }}</th>
         <th>{{ _('Deadline') }}</th>
-        <th>{{ _('Dev hours limit') }}</th>
+        <th>{{ _('Hours limit') }}</th>
         <th>{{ _('Trello board') }}</th>
         <th>{{ _('Note') }}</th>
         <th>{{ _('Created') }}</th>
@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ $project->name }}</td>
                 <td>
-                    <button onclick="document.location.href='{{ route('edit-client', ['id' => $project->client_id]) }}'" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i> {{ $project->client_name }}</button>
+                    <button onclick="document.location.href='{{ route('edit-client', ['id' => $project->client_id]) }}'" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i> {{ $project->client_name }} / {{ $project->client_country }}</button>
                 </td>
                 <td>{{ $project->date_from ?? '-' }}</td>
                 <td>{{ $project->date_to ?? '-' }}</td>

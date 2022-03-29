@@ -39,24 +39,4 @@ class AccessTest extends TestCase
         $this->get(route('timesheet'))->assertStatus(302);
         $this->get(route('userActivities'))->assertStatus(302);
     }
-
-    public function test_can_reach_protected_pages(): void
-    {
-        // Get user repository
-        $userRepository = $this->app->make(UserRepositoryInterface::class);
-
-        // Create first account
-        $user = $userRepository->addGoogleUser('test', str::random(5) . '@gmail.com', Hash::make('password'));
-        $this->be($user);
-
-        // User can log into his account
-        $this->assertTrue(Auth::check());
-
-        // Listed some pages with restricted access, that can be seen (status 200)
-        $this->get(route('home'))->assertStatus(200);
-        $this->get(route('clients'))->assertStatus(200);
-        $this->get(route('projects'))->assertStatus(200);
-        $this->get(route('timesheet'))->assertStatus(200);
-        $this->get(route('userActivities'))->assertStatus(200);
-    }
 }
